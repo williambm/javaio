@@ -1,0 +1,6 @@
+Relatório de gastos
+________________________
+Título: gasolina
+Valor: R$45,00
+Título: hub_USB
+Valor: R$152,78
