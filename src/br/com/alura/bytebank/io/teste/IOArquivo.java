@@ -1,6 +1,8 @@
 package br.com.alura.bytebank.io.teste;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Realiza a leitura de um relatório e extrai dele apenas o título e o valor de cada coisa
@@ -55,6 +57,35 @@ public class IOArquivo {
             /* Aqui fiz o split com apenas o espaço em branco, mas se eu soubesse regex seria ótimo
             para ja pegar duas palavras de uma vez */
             String[] splitString = posLeituraArquivo.split(" ");
+
+            /**
+             * Pattern
+             * ^ = começo de linha
+             * $ = fim de linha
+             * \w = word
+             * \d = númerico
+             * [0-9] = conjunto de caracteres
+             * [A-Z] = conjunto de alfanumérico maiusc ou minusc
+             * [A-Z0-9] = conjunto de alfanumérico maiusc ou minusc e numéricos
+             *  . = qualquer caractere
+             *  .* = qualquer caractere de 0 a n vezes (contador)
+             *  .+ = qualquer caracter de 1 a n vezes (contador)
+             *  :? = é o caractere ":" presente ou não de 0 a 1 vez (contador)
+             *
+             *  \d{4} = quatro vezes um dígito
+             *  \d{2,4} = quatro vezes um dígito de 2 a 4 vezes um digito
+             *
+             *  agrupamentos
+             *  (título):? (.*) = título é o grupo 1 e qualquer grupo de caracterer apresentado n vezes até o fim da linha é o grupo 2
+             *  ^(título):? (.*)$ = título é o grupo 1 e qualquer grupo de caracterer apresentado n vezes até o fim da linha é o grupo 2
+             *
+             *
+             */
+            Pattern pattern = Pattern.compile("^(título):? (.*)$");
+            Matcher matcher = pattern.matcher("título: abóbora ");
+
+            matcher.groupCount();
+
 
             //Tive que fazer um for clássico por causa da falta do regex
             for (int i = 0; i < splitString.length; i++) {
